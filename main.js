@@ -2,34 +2,59 @@ $(document).on('ready', function() {
 	var Z =0;
 
 
-  	var markerX = [];
-	var markerY = [];
-
-
   	$(document).on('click', function(event){
+  		console.log('hello');
   		var x = event.pageX;
   		var y = event.pageY;
-  		// event.stopPropagation();
-
-
-  			markerX[Z] = x;
-  			markerY[Z] = y;
-
-
-  		$('<img src="map-pin-green-hi-187x300.png" id="marker'+Z+'">').appendTo($('.container'))
+  	
+  		$('<div id="marker'+Z+'" class="removal"></div>').appendTo($('.container'))
   			.css({
-  				top: markerY[Z]-'60',
-  				left: markerX[Z]-'23',
+  				top: y-'60',
+  				left: x-'23',
+  				position: "relative"
+  				// zIndex: "1"
+  				})
+  			
+
+
+
+  		$('<img src="map-pin-green-hi-187x300.png">').appendTo($('#marker'+Z))
+  			.css({
   				position: "absolute",
   				height: '60px',
   				width: '45px',
-  				zIndex: "1",
+  				// zIndex: "1"
   				
-  			});
-  			console.log('coordinates:', markerX[Z], markerY[Z]);
-  			Z++;
+  				});
 
+  			$("<textarea rows='4' cols='5' type='text'>HELLO WORLD</textarea>").appendTo('#marker'+Z)
+  				.css({
+  					top: '-60px',
+  					left: '4px',
+  					position: 'absolute',
+  					display: 'none'
+  				})
+  				
+  			// console.log('coordinates:', x, y);
+ 
+
+  			Z++;
+  		$(document).on('click', 'textarea', function(event){
+  			event.stopPropagation();
   	});
+});
+  	$(document).on('click', '.removal', function(event){
+  		console.log('removal this: ', this)
+  		$(this).remove();
+  		event.stopPropagation();
+  	});
+  	
+  $('img').hover(function(event){
+  	$('textarea').toggle();
+  	event.stopPropagation();
+  });
+
+
 
 
 
